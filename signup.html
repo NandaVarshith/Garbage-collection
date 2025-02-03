@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-image: url('https://media.istockphoto.com/id/1356236425/vector/garbage-collection-waste-recycling-and-transportation-in-city.jpg?s=612x612&w=0&k=20&c=isH-eZh-4yN8gHd_miWdasTZxgWWaWZuUZIMGJjz96M='); background-size: cover; background-repeat: no-repeat;">
+    <div class="container">
+        <h2>Signup</h2>
+        <form id="signup-form">
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email" name="email" required>
+
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" name="password" required>
+
+            <button type="button" onclick="signupUser()">Signup</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p>Are you a admin ? <a href="admin-login.html">Admin Panel</a></p>
+
+    </div>
+
+    <script>
+        const users = JSON.parse(localStorage.getItem('users')) || {};
+
+        function signupUser() {
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (email in users) {
+                alert('User already exists!');
+            } else {
+                users[email] = password;
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Signup successful! Please login.');
+                document.getElementById('signup-form').reset();
+            }
+        }
+    </script>
+</body>
+</html>
